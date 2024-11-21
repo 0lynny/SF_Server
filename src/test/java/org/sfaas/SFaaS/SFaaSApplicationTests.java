@@ -1,4 +1,4 @@
-package org.sfass.SFaaS;
+package org.sfaas.SFaaS;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
