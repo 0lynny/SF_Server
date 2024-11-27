@@ -21,6 +21,7 @@ jobs:
       - name: application.yml 작성
         run: |
           cd src/main/resources
+          
           echo "${{ secrets.APPLICATION }}" > ./application-deploy.yml
           echo "${{ secrets.DATA }}" > ./data.sql
           
@@ -43,8 +44,8 @@ jobs:
 
       - name: docker image 빌드 및 푸시
         run: |
-          docker build --platform linux/amd64 -t teammoonshot/server .
-          docker push teammoonshot/server
+          docker build --platform linux/amd64 -t sfaas/server .
+          docker push sfaas/server
           
   deploy-cd:
     needs: ci
