@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: checkout
+      - name: Checkout source code
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -18,16 +18,14 @@ jobs:
           distribution: 'corretto'
           java-version: '17'
 
-      - name: application.yml 작성
+      - name: Create application.yml
         run: |
           cd src/main/resources
-
           echo "${{ secrets.APPLICATION }}" > ./application-deploy.yml
           echo "${{ secrets.DATA }}" > ./data.sql
-          
           cat ./application-deploy.yml
 
-      - name: build
+      - name: Build project
         run: |
           chmod +x gradlew
           ./gradlew build -x test
