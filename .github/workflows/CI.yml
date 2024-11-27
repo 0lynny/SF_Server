@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  dev-build-TEST:
+  build:
     runs-on: ubuntu-24.04
 
     steps:
