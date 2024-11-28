@@ -1,58 +1,53 @@
 name: CD
 
 on:
-  push:
-    branches: [ "develop" ]
-    
+  workflow_run:
+    workflows: ["CI"]  # CI 워크플로 이름
+    types:
+      - completed  # CI 완료 후 실행
+
 jobs:
-  dev-build-TEST:
+  deploy:
     runs-on: ubuntu-24.04
-    
+
     steps:
-      - name: checkout
+      - name: Checkout source code
         uses: actions/checkout@v3
-        
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: '17'
-          
-      - name: application.yml 작성
+
+      - name: Create application.yml
         run: |
           cd src/main/resources
-          
           echo "${{ secrets.APPLICATION }}" > ./application-deploy.yml
           echo "${{ secrets.DATA }}" > ./data.sql
-          
           cat ./application-deploy.yml
-          
-      - name: build
+
+      - name: Build project
         run: |
           chmod +x gradlew
           ./gradlew build -x test
         shell: bash
 
-      - name: docker build 가능하도록 환경 설정
+      - name: Enable Docker build
         uses: docker/setup-buildx-action@v2.9.1
 
-      - name: docker hub 로그인
+      - name: Login to Docker Hub
         uses: docker/login-action@v2.2.0
         with:
           username: ${{ secrets.DOCKERHUB_LOGIN_USERNAME }}
           password: ${{ secrets.DOCKERHUB_LOGIN_ACCESSTOKEN }}
 
-      - name: docker image 빌드 및 푸시
+      - name: Build and push Docker image
         run: |
           docker build --platform linux/amd64 -t sfaas/server .
           docker push sfaas/server
-          
-  deploy-cd:
-    needs: ci
-    runs-on: ubuntu-24.04
 
-    steps:
-      - name: docker 컨테이너 실행
+      - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.RELEASE_SERVER_IP }}
