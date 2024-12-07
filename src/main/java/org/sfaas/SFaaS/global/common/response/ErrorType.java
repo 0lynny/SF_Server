@@ -17,6 +17,7 @@ public enum ErrorType {
     INVALID_TYPE(HttpStatus.BAD_REQUEST, 4002, "잘못된 타입이 입력되었습니다."),
     INVALID_MISSING_HEADER(HttpStatus.BAD_REQUEST, 4003, "요청에 필요한 헤더값이 존재하지 않습니다."),
     INVALID_HTTP_REQUEST(HttpStatus.BAD_REQUEST, 4004, "허용되지 않는 문자열이 입력되었습니다."),
+    CSV_VALIDATION(HttpStatus.BAD_REQUEST, 4005, "CSV 파일 파싱 중 오류가 발생했습니다."),
     /**
      * 401 UNAUTHROZIED (4100 ~ 4199)
      */
