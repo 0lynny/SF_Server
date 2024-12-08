@@ -1,7 +1,6 @@
 package org.sfaas.SFaaS.csvimport.parser.impl;
 
 import java.io.StringReader;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +10,7 @@ import org.sfaas.SFaaS.csvimport.dto.CsvDataDto;
 import org.sfaas.SFaaS.csvimport.exception.CsvParseException;
 import org.sfaas.SFaaS.csvimport.mapper.CsvDataMapper;
 import org.sfaas.SFaaS.csvimport.parser.CsvParser;
+import org.springframework.stereotype.Component;
 
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -18,6 +18,7 @@ import com.opencsv.CSVReaderBuilder;
 
 import lombok.RequiredArgsConstructor;
 
+@Component
 @RequiredArgsConstructor
 public class WeldingCsvParser implements CsvParser {
 
