@@ -2,6 +2,8 @@ package org.sfaas.SFaaS.csvimport.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.Builder;
+
 /**
  * @param Speed
  * @param Length
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
  * @param GateOnTime
  * @param WorkingTime
  */
+@Builder
 public record CsvDataDto(
 	Short Speed,
 	Double Length,
