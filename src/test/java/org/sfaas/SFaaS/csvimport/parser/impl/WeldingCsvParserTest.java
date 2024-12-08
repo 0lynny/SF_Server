@@ -37,14 +37,14 @@ class WeldingCsvParserTest {
 			"1,250,241.1,1688,1000,100,82,1154, 2022-01-08 10:11:45.181"
 		);
 		CsvDataDto expectedDto = CsvDataDto.builder()
-			.Speed((short) 250)
-			.Length(241.1)
-			.RealPower((short) 1688)
-			.SetFrequency((short) 1000)
-			.SetDuty((short) 100)
-			.SetPower((short) 82)
-			.GateOnTime((short) 1154)
-			.WorkingTime(LocalDateTime.parse("2022-01-08T10:11:45.181"))
+			.speed((short) 250)
+			.length(241.1)
+			.realPower((short) 1688)
+			.setFrequency((short) 1000)
+			.setDuty((short) 100)
+			.setPower((short) 82)
+			.gateOnTime((short) 1154)
+			.workingTime(LocalDateTime.parse("2022-01-08T10:11:45.181"))
 			.build();
 		when(csvDataMapper.csvToDto(any())).thenReturn(expectedDto);
 

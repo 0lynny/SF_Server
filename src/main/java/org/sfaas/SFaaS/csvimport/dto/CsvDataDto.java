@@ -5,23 +5,23 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 
 /**
- * @param Speed
- * @param Length
- * @param RealPower
- * @param SetFrequency
- * @param SetDuty
- * @param SetPower
- * @param GateOnTime
- * @param WorkingTime
+ * @param speed
+ * @param length
+ * @param realPower
+ * @param setFrequency
+ * @param setDuty
+ * @param setPower
+ * @param gateOnTime
+ * @param workingTime
  */
 @Builder
 public record CsvDataDto(
-	Short Speed,
-	Double Length,
-	Short RealPower,
-	Short SetFrequency,
-	Short SetDuty,
-	Short SetPower,
-	Short GateOnTime,
-	LocalDateTime WorkingTime
+	Short speed,
+	Double length,
+	Short realPower,
+	Short setFrequency,
+	Short setDuty,
+	Short setPower,
+	Short gateOnTime,
+	LocalDateTime workingTime
 ) {}
