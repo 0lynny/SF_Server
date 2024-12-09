@@ -17,7 +17,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class WeldingCsvParser implements CsvParser {
@@ -44,10 +46,14 @@ public class WeldingCsvParser implements CsvParser {
 			.build()) {
 			String[] nextLine;
 			while((nextLine = csvReader.readNext()) != null) {
+				for (int i = 0; i < nextLine.length; i++) {
+					nextLine[i] = nextLine[i].trim();
+				}
 				CsvDataDto dto = csvDataMapper.csvToDto(nextLine);
 				result.add(dto);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new CsvParseException();
 		}
 		return result;
@@ -78,6 +84,10 @@ public class WeldingCsvParser implements CsvParser {
 	private boolean isValidHeader(String[] header) {
 		if (CSV_HEADERS.length != header.length) {
 			return false;
+		}
+
+		for (int i = 0; i < header.length; i++) {
+			header[i] = header[i].trim();
 		}
 
 		for (int i = 0; i < CSV_HEADERS.length; i++) {
